@@ -38,8 +38,9 @@ def home():
 def get_paintings():
     page = int(request.args.get('page', 1))  
     limit = int(request.args.get('limit', 10))  
-
+    q = request.args.get('q', '').lower()
     offset = (page - 1) * limit
+    query = Painting.query
 
     paintings = Painting.query.offset(offset).limit(limit).all()
     total = Painting.query.count()
